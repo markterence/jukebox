@@ -22,7 +22,11 @@
       class="flex items-center justify-center right-0 left-0 top-0 absolute w-12 h-12 p-0 shadow-md rounded-full"
       @click="togglePlayState"
     >
-      <font-awesome-icon v-if="isPlaying" icon="fa-solid fa-play" />
+      <font-awesome-icon
+        v-if="isPlaying"
+        class="ml-1"
+        icon="fa-solid fa-play"
+      />
       <font-awesome-icon v-else icon="fa-solid fa-pause" />
     </button>
   </div>
@@ -41,7 +45,7 @@ function togglePlayState() {
 
 onMounted(() => {
   interval = setInterval(() => {
-    if (isPlaying) {
+    if (!isPlaying.value) {
       if (progressValue.value >= 100) {
         return (progressValue.value = 0);
       }
