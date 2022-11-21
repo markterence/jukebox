@@ -1,17 +1,18 @@
 <template>
-  <div class="h-28 flex flex-col justify-center">
-    <div class="absolute ml-5 z-20 -mt-6">
-      <div class="w-24 h-24 rounded-full bg-slate-200">
+  <div class="flex flex-col justify-center">
+    <div class="absolute ml-5 z-20">
+      <div class="w-20 h-20 rounded-full bg-slate-200">
         <img
           class="border border-slate-100 animate-spin [animation-duration:8s] rounded-full"
           :src="song.albumArt"
         />
       </div>
     </div>
-    <footer class="w-full py-3 h-auto shadow-[0_-2px_8px_2px_rgba(0,0,0,0.3)]">
+    <footer class="w-full py-2 h-auto shadow-[0_-2px_8px_2px_rgba(0,0,0,0.3)]">
       <div class="flex px-6 relative overflow-visible">
-        <div class="w-24 max-h-10"></div>
-        <div class="flex flex-col relative ml-6">
+        <!-- Spacer -->
+        <div class="w-16 max-h-10"></div>
+        <div class="flex flex-col relative ml-8">
           <div class="font-bold text-slate-800">Lorem ipsum {{ counter }}</div>
           <div class="text-sm text-slate-500/80 font-semibold">
             dolor sit amet
@@ -28,14 +29,6 @@
         </div>
       </div>
     </footer>
-    <div>
-      <div class="px-4 flex">
-        <div>Back</div>
-        <div>
-          <button><font-awesome-icon icon="fa-regular fa-heart" /></button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
