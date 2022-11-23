@@ -3,7 +3,7 @@
     <div class="absolute ml-5 z-20">
       <div class="w-20 h-20 rounded-full bg-slate-200">
         <img
-          class="border border-slate-100 animate-spin [animation-duration:8s] rounded-full"
+          class="border border-slate-100 animate-spin [animation-duration:24s] rounded-full"
           :src="song.albumArt"
         />
       </div>
