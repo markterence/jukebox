@@ -3,12 +3,21 @@
     <div class="flex flex-col w-full h-full">
       <div class="h-full">
         content
-        <Track
-          v-for="i in 10"
-          :key="i"
-          @click="playTrack(i)"
-          :active="active"
-        ></Track>
+
+        <div class="px-8">
+          <ul class="tracklist flex flex-col-reverse">
+            <Listbox>
+              <ListboxOption
+                v-for="i in 10"
+                :key="i"
+                :value="i"
+                v-slot="{ active, selected }"
+              >
+                <Track @click="playTrack(i)" :active="selected"></Track>
+              </ListboxOption>
+            </Listbox>
+          </ul>
+        </div>
       </div>
       <div class="w-full">
         <PlayerFooter />
@@ -27,6 +36,12 @@
 
 <script setup>
 import { ref } from "vue";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOptions,
+  ListboxOption,
+} from "@headlessui/vue";
 
 const active = ref(false);
 
