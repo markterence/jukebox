@@ -10,10 +10,11 @@ import {
   faBackward,
   faPlay,
   faPause,
+  faMusic,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 /* add icons to the library */
-library.add(faForward, faBackward, faPlay, faPause, farHeart);
+library.add(faForward, faBackward, faPlay, faPause, farHeart, faMusic);
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("font-awesome-icon", FontAwesomeIcon);

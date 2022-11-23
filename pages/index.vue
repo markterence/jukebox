@@ -1,7 +1,15 @@
 <template>
   <div class="w-full h-screen flex">
     <div class="flex flex-col w-full h-full">
-      <div class="h-full">content</div>
+      <div class="h-full">
+        content
+        <Track
+          v-for="i in 10"
+          :key="i"
+          @click="playTrack(i)"
+          :active="active"
+        ></Track>
+      </div>
       <div class="w-full">
         <PlayerFooter />
       </div>
@@ -17,4 +25,13 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+const active = ref(false);
+
+function playTrack(track) {
+  active.value = !active.value;
+  console.debug("play", track, active.value);
+}
+</script>
