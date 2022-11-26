@@ -1,17 +1,5 @@
 <template>
   <div class="relative w-12 h-12 overflow-visible">
-    <!-- <svg viewBox="0 0 512 512" role="img" class="overflow-visible inline-block">
-      <circle
-        stroke="black"
-        fill="transparent"
-        :stroke-dasharray="circumference + ' ' + circumference"
-        :style="{ strokeDashoffset }"
-        :stroke-width="stroke"
-        :r="normalizedRadius"
-        :cx="radius"
-        :cy="radius"
-      ></circle>
-    </svg> -->
     <ProgressCircle
       progressClass="transition-all duration[0.4s] ease-in-out"
       :progressValue="progressValue"
