@@ -1,0 +1,142 @@
+<template>
+  <div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid"
+    >
+      <g transform="rotate(180 50 50)">
+        <rect x="10.66" y="42.5" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="50;45;10;50"
+            times="0;0.33;0.66;1"
+            dur="0.4s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.5s"
+          ></animate>
+        </rect>
+        <rect x="27.33" y="42.5" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="30;40;10;30"
+            times="0;0.33;0.66;1"
+            dur="0.3s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.9s"
+          ></animate>
+        </rect>
+
+        <rect x="44" y="42.5" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="50;45;10;50"
+            times="0;0.33;0.66;1"
+            dur="0.4s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.4444444444444444s"
+          ></animate>
+        </rect>
+
+        <rect x="60.66" y="42.5" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="30;40;10;30"
+            times="0;0.33;0.66;1"
+            dur="0.3s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.9s"
+          ></animate>
+        </rect>
+
+        <rect x="77.33" y="42.5" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="50;45;10;50"
+            times="0;0.33;0.66;1"
+            dur="0.4s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.5s"
+          ></animate>
+        </rect>
+      </g>
+
+      <g transform="rotate(0 0 0)">
+        <rect x="77.33" y="49" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="50;45;10;50"
+            times="0;0.33;0.66;1"
+            dur="0.4s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.5s"
+          ></animate>
+        </rect>
+        <rect x="60.66" y="42.5" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="30;40;10;30"
+            times="0;0.33;0.66;1"
+            dur="0.3s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.9s"
+          ></animate>
+        </rect>
+
+        <rect x="44" y="42.5" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="50;45;10;50"
+            times="0;0.33;0.66;1"
+            dur="0.4s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.4444444444444444s"
+          ></animate>
+        </rect>
+
+        <rect x="27.33" y="42.5" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="30;40;10;30"
+            times="0;0.33;0.66;1"
+            dur="0.3s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.9s"
+          ></animate>
+        </rect>
+
+        <rect x="10.66" y="42.5" width="12" height="40" fill="currentColor">
+          <animate
+            attributeName="height"
+            calcMode="spline"
+            values="50;45;10;50"
+            times="0;0.33;0.66;1"
+            dur="0.4s"
+            keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1"
+            repeatCount="indefinite"
+            begin="-0.5s"
+          ></animate>
+        </rect>
+      </g>
+    </svg>
+  </div>
+</template>
