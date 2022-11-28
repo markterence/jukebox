@@ -23,6 +23,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 
+const props = defineProps([
+  'progressValue',
+]);
+
 const isPlaying = ref(false);
 const progressValue = ref(25);
 let interval: any;

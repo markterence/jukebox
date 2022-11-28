@@ -16,7 +16,8 @@
         class="w-10 px-1 text-slate-100 h-full flex justify-center items-center flex-col"
       >
         <div>
-          <font-awesome-icon icon="fa-solid fa-play" />
+          <font-awesome-icon v-if="!props.active" icon="fa-solid fa-play" />
+          <StaticEqualizer class="w-8 text-slate-100" v-else></StaticEqualizer>
         </div>
       </div>
 
@@ -46,6 +47,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+});
+
+const isPlaying = computed(() => {
+  return props.active;
 });
 </script>
 

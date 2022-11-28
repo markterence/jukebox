@@ -8,7 +8,9 @@
         />
       </div>
     </div>
-    <footer class="w-full py-2 h-auto shadow-[0_-2px_8px_2px_rgba(0,0,0,0.3)]">
+    <footer
+      class="w-full py-2 h-auto shadow-[0_-2px_8px_2px_rgba(0,0,0,0.3)] bg-white"
+    >
       <div class="flex px-6 relative overflow-visible">
         <!-- Spacer -->
         <div class="w-16 max-h-10"></div>
