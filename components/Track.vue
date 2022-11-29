@@ -16,8 +16,12 @@
         class="w-10 px-1 text-slate-100 h-full flex justify-center items-center flex-col"
       >
         <div>
-          <font-awesome-icon v-if="!props.active" icon="fa-solid fa-play" />
-          <StaticEqualizer class="w-8 text-slate-100" v-else></StaticEqualizer>
+          <!-- <font-awesome-icon v-if="!props.active" icon="fa-solid fa-play" /> -->
+          <StaticEqualizer2
+            class="w-8 text-slate-100 opacity-100"
+            :class="{ 'text-slate-200': !props.active }"
+            :animate="props.active"
+          ></StaticEqualizer2>
         </div>
       </div>
 

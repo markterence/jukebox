@@ -5,7 +5,7 @@
         content
 
         <div
-          class="px-8 h-[calc(100%-9rem)] flex flex-col overflow-y-scroll mb-4"
+          class="px-8 py-3 h-[calc(100%-9rem)] flex flex-col overflow-y-scroll mb-4"
         >
           <ul class="tracklist flex flex-col-reverse">
             <Listbox>
