@@ -26,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+import { useSpotifyStore } from "~~/store/spotify";
+
 function generateRandomString(size = 16) {
   let text = "";
   const possible =
@@ -38,7 +40,8 @@ function generateRandomString(size = 16) {
 }
 
 const CLIENT_NAME = "Spotify Web Client";
-const CLIENT_ID = "CLIENT_ID";
+const config = useRuntimeConfig();
+const CLIENT_ID = config.public.spotifyClientId;
 
 const access_token = ref("Enter Token Here");
 
@@ -46,9 +49,20 @@ const savedTracks = ref();
 const devices = ref();
 let player = undefined;
 
-const spotify = useSpotifyAPI();
+const spotify = useSpotifyAPI({
+  redirect_uri: "http://localhost:3000/test-page/auth-callback",
+  spotifyClientId: CLIENT_ID,
+});
+const spotifyStore = useSpotifyStore();
 
-function reqeustUserAuthorization() {
+const verifier = spotify.auth.pkce.generateCodeVerifier();
+const cc = await spotify.auth.pkce.generateCodeChallenge(verifier);
+spotifyStore.cc = cc;
+spotifyStore.cv = verifier;
+(window as any).spotifyStore = {};
+(window as any).spotifyStore.cc = cc;
+(window as any).spotifyStore.cv = verifier;
+async function reqeustUserAuthorization() {
   // Redirect user to the Spotify /authorization page with the Oauth2 parameters
 
   const scope = [
@@ -64,17 +78,26 @@ function reqeustUserAuthorization() {
 
   const state = generateRandomString();
 
-  const queryParams = new URLSearchParams({
-    response_type: "code",
-    client_id: CLIENT_ID,
-    scope: scope.join(" "),
-    redirect_uri: "http://localhost:3002/test-page/auth-callback",
+  const code_challenge = spotify.auth.pkce.generateCodeVerifier();
+  spotifyStore.setChallenge(code_challenge);
+
+  spotify.auth.requestUserAuthorization_PKCE({
+    code_challenge: cc,
     state: state,
+    scope: scope,
   });
 
-  window.open(
-    `https://accounts.spotify.com/authorize/?${queryParams.toString()}`
-  );
+  // const queryParams = new URLSearchParams({
+  //   response_type: "code",
+  //   client_id: CLIENT_ID,
+  //   scope: scope.join(" "),
+  //   redirect_uri: "http://localhost:3002/test-page/auth-callback",
+  //   state: state,
+  // });
+
+  // window.open(
+  //   `https://accounts.spotify.com/authorize/?${queryParams.toString()}`
+  // );
 }
 
 async function sync() {

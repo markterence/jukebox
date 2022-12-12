@@ -10,9 +10,18 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Move to serverless
+import { useSpotifyStore } from "~~/store/spotify";
+
+const config = useRuntimeConfig();
+const CLIENT_ID = config.public.spotifyClientId;
+
+const spotify = useSpotifyAPI({
+  redirect_uri: "http://localhost:3000/test-page/auth-callback",
+  spotifyClientId: CLIENT_ID,
+});
+const spotifyStore = useSpotifyStore();
+
 const CLIENT_SECRET = "CLIENT_SECRET";
-const CLIENT_ID = "CLIENT_ID";
 const access_token = ref();
 const route = useRoute();
 
@@ -44,6 +53,18 @@ async function requestAccessToken() {
 }
 
 onMounted(async () => {
-  access_token.value = await requestAccessToken();
+  const v = spotifyStore.pkce.code_challenge;
+  const verifier = await spotify.auth.pkce.generateCodeChallenge(v);
+
+  const res = await spotify.auth.requestAccessToken_PKCE({
+    code: route.query.code?.toString() || "",
+    code_verifier: (window as any).spotifyStore.cv,
+  });
+
+  spotifyStore.setToken(res);
+
+  setTimeout(() => {
+    window.close();
+  }, 2000);
 });
 </script>
