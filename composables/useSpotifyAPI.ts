@@ -147,7 +147,8 @@ export function useSpotifyAPI(config: UseSpotifyAPIConfig) {
   }
 
   function requestUserAuthorization_PKCE(
-    options: SpotifyAuthorizationCodeOptions
+    options: SpotifyAuthorizationCodeOptions,
+    ...windowArgs: any
   ) {
     const queryParams = new URLSearchParams({
       response_type: "code",
@@ -160,7 +161,8 @@ export function useSpotifyAPI(config: UseSpotifyAPIConfig) {
     });
 
     window.open(
-      `https://accounts.spotify.com/authorize/?${queryParams.toString()}`
+      `https://accounts.spotify.com/authorize/?${queryParams.toString()}`,
+      ...windowArgs
     );
   }
 

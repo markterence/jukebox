@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import { useSpotifyStore } from "~~/store/spotify";
+import { useStorage } from "@vueuse/core";
 
 const config = useRuntimeConfig();
 const CLIENT_ID = config.public.spotifyClientId;
@@ -25,6 +26,16 @@ const CLIENT_SECRET = "CLIENT_SECRET";
 const access_token = ref();
 const route = useRoute();
 
+const storage = useStorage("vue-use-local-storage", {
+  verifier: "Banana",
+  challenge: "Yellow",
+});
+
+const tokenStorage = useStorage<any>("token", {
+  token: {},
+});
+
+console.log(storage);
 function toBase64(str: string) {
   return window.btoa(str);
 }
@@ -53,16 +64,16 @@ async function requestAccessToken() {
 }
 
 onMounted(async () => {
-  const v = spotifyStore.pkce.code_challenge;
-  const verifier = await spotify.auth.pkce.generateCodeChallenge(v);
+  const v = storage.value.verifier;
+  const c = storage.value.challenge;
 
   const res = await spotify.auth.requestAccessToken_PKCE({
     code: route.query.code?.toString() || "",
-    code_verifier: (window as any).spotifyStore.cv,
+    code_verifier: v,
   });
 
   spotifyStore.setToken(res);
-
+  tokenStorage.value.token = res;
   setTimeout(() => {
     window.close();
   }, 2000);

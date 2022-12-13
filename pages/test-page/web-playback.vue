@@ -5,7 +5,9 @@
         <button @click="reqeustUserAuthorization">Login</button>
 
         <div>
-          <input type="text" v-model="access_token" />
+          <p>
+            {{ tokenStorage.token }}
+          </p>
           <button @click="sync">sync</button>
         </div>
       </div>
@@ -27,6 +29,7 @@
 
 <script setup lang="ts">
 import { useSpotifyStore } from "~~/store/spotify";
+import { useStorage } from "@vueuse/core";
 
 function generateRandomString(size = 16) {
   let text = "";
@@ -56,12 +59,22 @@ const spotify = useSpotifyAPI({
 const spotifyStore = useSpotifyStore();
 
 const verifier = spotify.auth.pkce.generateCodeVerifier();
-const cc = await spotify.auth.pkce.generateCodeChallenge(verifier);
-spotifyStore.cc = cc;
-spotifyStore.cv = verifier;
-(window as any).spotifyStore = {};
-(window as any).spotifyStore.cc = cc;
-(window as any).spotifyStore.cv = verifier;
+const code_challenge = await spotify.auth.pkce.generateCodeChallenge(verifier);
+
+const storage = useStorage("vue-use-local-storage", {
+  verifier: verifier,
+  challenge: code_challenge,
+});
+
+const tokenStorage = useStorage<any>("token", {
+  token: {},
+});
+
+storage.value.challenge = code_challenge;
+storage.value.verifier = verifier;
+
+console.log("PKCE", unref(storage.value));
+
 async function reqeustUserAuthorization() {
   // Redirect user to the Spotify /authorization page with the Oauth2 parameters
 
@@ -78,37 +91,28 @@ async function reqeustUserAuthorization() {
 
   const state = generateRandomString();
 
-  const code_challenge = spotify.auth.pkce.generateCodeVerifier();
-  spotifyStore.setChallenge(code_challenge);
-
-  spotify.auth.requestUserAuthorization_PKCE({
-    code_challenge: cc,
-    state: state,
-    scope: scope,
-  });
-
-  // const queryParams = new URLSearchParams({
-  //   response_type: "code",
-  //   client_id: CLIENT_ID,
-  //   scope: scope.join(" "),
-  //   redirect_uri: "http://localhost:3002/test-page/auth-callback",
-  //   state: state,
-  // });
-
-  // window.open(
-  //   `https://accounts.spotify.com/authorize/?${queryParams.toString()}`
-  // );
+  spotify.auth.requestUserAuthorization_PKCE(
+    {
+      code_challenge: code_challenge,
+      state: state,
+      scope: scope,
+    },
+    ["_blank"]
+  );
 }
 
 async function sync() {
-  savedTracks.value = await spotify.getSavedTracks(access_token.value);
+  console.log("token", tokenStorage.value.token.access_token);
+  savedTracks.value = await spotify.getSavedTracks(
+    tokenStorage.value.token.access_token
+  );
   //   devices.value = await spotify.getDevices(access_token.value);
 }
 
 async function play(item: any) {
   const { track } = item;
 
-  await spotify.play(access_token.value, {
+  await spotify.play(tokenStorage.value.token.access_token, {
     uris: [track.uri],
     offset: 0,
     deviceId: devices.value.device_id,
@@ -131,12 +135,30 @@ function handlePlayerStatus(evt: any) {
   };
 }
 
+let tokenSynced = false;
+watch(
+  tokenStorage,
+  (newVal, oldVal) => {
+    if (!tokenSynced && JSON.stringify(newVal) != "{}") {
+      sync().then(() => {
+        tokenSynced = true;
+      });
+    }
+    console.log("changed", newVal);
+    console.log("changed", oldVal);
+
+    tokenStorage.value = newVal;
+  },
+  {
+    deep: true,
+  }
+);
 function initializePlayer() {
   const volume = 0.7;
 
   player = new (window as any).Spotify.Player({
     getOAuthToken: (callback: any) => {
-      callback(access_token.value);
+      callback(tokenStorage.value.token.access_token);
     },
     CLIENT_NAME,
     volume,
@@ -170,6 +192,7 @@ onMounted(async () => {
     }
 
     await spotify.loadSpotifyPlayer();
+    await sync();
   }
 });
 </script>

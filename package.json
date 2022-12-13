@@ -10,6 +10,8 @@
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
     "@types/lodash": "^4.14.190",
+    "@vueuse/core": "^9.6.0",
+    "@vueuse/nuxt": "^9.6.0",
     "autoprefixer": "^10.4.13",
     "lodash": "^4.17.21",
     "nuxt": "3.0.0-rc.13",
@@ -25,6 +27,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.2",
     "@headlessui/vue": "^1.7.4",
     "@pinia/nuxt": "^0.4.5",
-    "crypto-js": "^4.1.1"
+    "crypto-js": "^4.1.1",
+    "unstorage": "^1.0.1"
   }
 }
