@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       spotifyClientId: process.env.SPOTIFY_CLIENT_ID,
+      spotifyCallbackUri:
+        process.env.SPOTIFY_CALLBACK_URI ||
+        "http://localhost:3000/auth/callback",
     },
   },
   ssr: false,
