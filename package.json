@@ -12,12 +12,12 @@
     "@types/lodash": "^4.14.190",
     "@vueuse/core": "^9.6.0",
     "@vueuse/nuxt": "^9.6.0",
-    "autoprefixer": "^10.4.13",
+    "autoprefixer": "^10.4.15",
     "lodash": "^4.17.21",
-    "nuxt": "3.0.0-rc.13",
+    "nuxt": "^3.7.0",
     "postcss": "^8.4.19",
     "surge": "^0.23.1",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.3.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
@@ -25,9 +25,9 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.2",
-    "@headlessui/vue": "^1.7.4",
-    "@pinia/nuxt": "^0.4.5",
     "crypto-js": "^4.1.1",
-    "unstorage": "^1.0.1"
+    "unstorage": "^1.0.1",
+    "@headlessui/vue": "^1.7.16",
+    "@pinia/nuxt": "^0.4.11"
   }
 }
